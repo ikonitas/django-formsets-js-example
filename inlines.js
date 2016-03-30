@@ -2,7 +2,6 @@ $().ready(function() {
 
   $(".add_another").on("click", function(event) {
     event.preventDefault();
-    debugger;
     var prefix = $(this).attr("prefix"),
       total_forms = $("#id_" + prefix + "-TOTAL_FORMS"),
       form_num = parseInt(total_forms.val()),
