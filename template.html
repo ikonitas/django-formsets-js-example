@@ -1,0 +1,34 @@
+{% for form in formset %}
+    {% for fieldset in form.fieldsets %}
+        <li>{{ fieldset.description }}</li>
+        {% for field in fieldset %}
+            {% if field.is_hidden %}
+                {{ field }}
+            {% else %}
+                <li{{ field.row_atts }}>
+                  {{ field.label_tag }}
+                  {{ field.help_text }}
+                  {% if readonly %}
+                      {{ field|readonly }}
+                  {% else %}
+                      {{ field.errors }}
+                      {{ field }}
+                  {% endif %}
+                </li>
+            {% endif %}
+
+            {% if field.name == 'file' %}
+                <li>
+                    <a href="#" class="add_another" prefix="{{ formset.prefix }}">
+                        Add another file
+                    </a>
+                </li>
+            {% endif %}
+
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+<li class="hidden" id="empty_{{ formset.prefix }}">
+    {{ formset.empty_form }}
+</li>
